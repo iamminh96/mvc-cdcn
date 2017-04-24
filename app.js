@@ -1,8 +1,3 @@
-
-/**
- * Module dependencies.
- */
-
 var express = require('express'),
 	http = require('http'), 
 	path = require('path'),
@@ -14,11 +9,8 @@ var express = require('express'),
 	Blog = require('./controllers/Blog'),
 	Page = require('./controllers/Page');
 
-// all environments
-// app.set('port', process.env.PORT || 3000);
 app.set('views', __dirname + '/templates');
 app.set('view engine', 'hjs');
-app.use(express.favicon());
 app.use(express.logger('dev'));
 app.use(express.bodyParser());
 app.use(express.methodOverride());
@@ -35,7 +27,7 @@ if ('development' == app.get('env')) {
 
 MongoClient.connect('mongodb://pnh:pnhoang@ds159050.mlab.com:59050/pnh-db', function(err, db) {
 	if(err) {
-		console.log('Sorry, there is no mongo db server running.');
+		console.log(err);
 	} else {
 		var attachDB = function(req, res, next) {
 			req.db = db;
@@ -64,9 +56,10 @@ MongoClient.connect('mongodb://pnh:pnhoang@ds159050.mlab.com:59050/pnh-db', func
 		});		
 		http.createServer(app).listen(config.port, function() {
 		  	console.log(
-		  		'Successfully connected to mongodb://' + config.mongo.host + ':' + config.mongo.port,
-		  		'\nExpress server listening on port ' + config.port
+		  		'Connected'
 		  	);
 		});
 	}
 });
+
+module.exports = app;

@@ -25,7 +25,7 @@ if ('development' == app.get('env')) {
   	app.use(express.errorHandler());
 }
 
-MongoClient.connect('mongodb://pnh:pnhoang@ds159050.mlab.com:59050/pnh-db', function(err, db) {
+MongoClient.connect('mongodb://robert:12345678@ds159050.mlab.com:59050/fastdelivery', function(err, db) {
 	if(err) {
 		console.log(err);
 	} else {
